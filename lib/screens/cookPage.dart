@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cookoff/main.dart';
 import 'package:cookoff/models/modelUrl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -55,19 +56,19 @@ class _Cook_offState extends State<Cook_off> {
               ),
               Tab(
                 icon: Icon(
-                  Icons.people,
+                  Icons.sell_outlined,
                   color: Color.fromARGB(255, 249, 134, 126),
                 ),
               ),
               Tab(
                 icon: Icon(
-                  Icons.photo_sharp,
+                  Icons.volunteer_activism,
                   color: Color.fromARGB(255, 249, 134, 126),
                 ),
               ),
               Tab(
                 icon: Icon(
-                  Icons.share,
+                  Icons.food_bank_outlined,
                   color: Color.fromARGB(255, 249, 134, 126),
                 ),
               ),
@@ -102,10 +103,12 @@ class _Cook_offState extends State<Cook_off> {
                 onPressed: () {
                   _pickImage();
                 },
-                child: Text("Take Photo")),
-            Text(
-              "Description",
-            ),
+                child: Text(
+                  "Show us you masterpiece",
+                  style: TextStyle(color: Colors.white),
+                )),
+            Text("Tell us abou it",
+                style: TextStyle(color: Colors.white, fontSize: 20)),
             const SizedBox(
               height: 100,
               child: TextField(
@@ -118,14 +121,16 @@ class _Cook_offState extends State<Cook_off> {
                 maxLines: null,
               ),
             ),
-            Text("Choice Chef"),
+            Text("Choosen Chef",
+                style: TextStyle(color: Colors.white, fontSize: 20)),
             Divider(
               color: Colors.grey,
               thickness: 2,
             ),
             RadioListTile(
               value: "gorden",
-              title: Text("gorden"),
+              title: Text("gorden",
+                  style: TextStyle(color: Colors.white, fontSize: 20)),
               groupValue: chif,
               onChanged: (value) {
                 setState(() {
@@ -136,7 +141,8 @@ class _Cook_offState extends State<Cook_off> {
             ),
             RadioListTile(
               value: "mathea",
-              title: Text("mathea"),
+              title: Text("mathea",
+                  style: TextStyle(color: Colors.white, fontSize: 20)),
               groupValue: chif,
               onChanged: (value) {
                 setState(() {
@@ -145,7 +151,8 @@ class _Cook_offState extends State<Cook_off> {
                 });
               },
             ),
-            Text("Choice Chef"),
+            Text("Rate your Choice",
+                style: TextStyle(color: Colors.white, fontSize: 20)),
             Divider(
               color: Colors.grey,
               thickness: 2,
@@ -154,17 +161,27 @@ class _Cook_offState extends State<Cook_off> {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  Text("$name"),
+                  Text("$name",
+                      style: TextStyle(color: Colors.white, fontSize: 20)),
                   RatingBar.builder(
                     itemBuilder: (context, _) => Icon(
                       Icons.star,
                       color: Colors.amber,
                     ),
                     onRatingUpdate: (value) {},
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
+            TextButton.icon(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return MyApp();
+                  }));
+                },
+                icon: Icon(Icons.auto_fix_high_sharp),
+                label: Text("Lets Do it again",
+                    style: TextStyle(color: Colors.white, fontSize: 20)))
           ],
         ),
       ),
@@ -180,12 +197,16 @@ class _Cook_offState extends State<Cook_off> {
       ])),
       child: Column(
         children: [
-          // Padding(
-          // padding: const EdgeInsets.all(16.0),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              "Vote you FAVOURITE",
+              style: TextStyle(fontSize: 30, color: Colors.white),
+            ),
+          ),
           Image.asset(
             "images/2.jpg",
             width: 300,
-            height: 400,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -199,7 +220,10 @@ class _Cook_offState extends State<Cook_off> {
                         });
                       },
                       child: Text("vote")),
-                  Text("$gordenVotes")
+                  Text(
+                    "$gordenVotes",
+                    style: TextStyle(fontSize: 30, color: Colors.white),
+                  )
                 ],
               ),
               SizedBox(
@@ -214,7 +238,10 @@ class _Cook_offState extends State<Cook_off> {
                         });
                       },
                       child: Text("vote")),
-                  Text("$matheaVotes")
+                  Text(
+                    "$matheaVotes",
+                    style: TextStyle(fontSize: 30, color: Colors.white),
+                  )
                 ],
               )
             ],
@@ -243,7 +270,7 @@ class _Cook_offState extends State<Cook_off> {
             trailing: Icon(Icons.male),
             onTap: () {
               AlertDialog alert = AlertDialog(
-                backgroundColor: Colors.blueAccent,
+                backgroundColor: Color.fromARGB(255, 120, 75, 243),
                 title: Text("Gorden Ramsay"),
                 content: Text(
                   "a British chef, restaurateur, television personality and writer. His restaurant group, Gordon Ramsay Restaurants, was founded in 1997 and has been awarded 16 Michelin stars overall; it currently holds a total of seven. Michelin Starred is His signature restaurant, Restaurant Gordon Ramsay in Chelsea, London, has held three Michelin stars since 2001. After rising to fame on the British television miniseries Boiling Point in 1999, Ramsay became one of the best-known and most influential chefs in the United Kingdom.",
@@ -267,7 +294,7 @@ class _Cook_offState extends State<Cook_off> {
             trailing: Icon(Icons.female),
             onTap: () {
               AlertDialog alert = AlertDialog(
-                backgroundColor: Colors.red,
+                backgroundColor: Color.fromARGB(255, 249, 134, 126),
                 title: Text("Martha Stewart"),
                 content: Text(
                   "an American retail businesswoman, writer, and television personality. As founder of Martha Stewart Living Omnimedia, she gained success through a variety of business ventures, encompassing publishing, broadcasting, merchandising and e-commerce. She has written numerous bestselling books, is the publisher of Martha Stewart Living magazine and hosted two syndicated television programs: Martha Stewart Living, which ran from 1993 to 2004, and Martha, which ran from 2005 to 2012.",
@@ -298,30 +325,46 @@ class _Cook_offState extends State<Cook_off> {
         children: [
           Column(
             children: [
-              Image(
-                  width: 300,
-                  height: 300,
-                  image: NetworkImage(
-                      "https://media12.s-nbcnews.com/i/MSNBC/Components/Video/202101/1609854253638_tdy_food_8a_martha_stewart_new_book_tips_enjoy_210105_1920x1080.jpg")),
+              GestureDetector(
+                onTap: Blog_FunctionM,
+                child: Image(
+                    width: 300,
+                    height: 300,
+                    image: NetworkImage(
+                        "https://media12.s-nbcnews.com/i/MSNBC/Components/Video/202101/1609854253638_tdy_food_8a_martha_stewart_new_book_tips_enjoy_210105_1920x1080.jpg")),
+              ),
               URlClass(
-                  myfunction: Facebook_Function,
+                  myfunction: Facebook_FunctionM,
                   myplatformIcon: Icons.facebook,
-                  myplatformSubTitle: "sss",
-                  myplatformTitle: "sss"),
+                  myplatformSubTitle: "Visit her facebook page",
+                  myplatformTitle: "Martha Stewart"),
               URlClass(
-                  myfunction: instagram_function,
+                  myfunction: instagram_functionM,
                   myplatformIcon: Ionicons.logo_instagram,
-                  myplatformSubTitle: "sss",
-                  myplatformTitle: "sss"),
+                  myplatformSubTitle: "visit her instagram page",
+                  myplatformTitle: "Martha stewart"),
             ],
           ),
           Column(
             children: [
-              Image(
-                  width: 300,
-                  height: 300,
-                  image: NetworkImage(
-                      "https://i.pinimg.com/originals/80/1d/90/801d90bddba8bc272a7f27d67d2552f8.jpg")),
+              GestureDetector(
+                onTap: Blog_FunctionG,
+                child: Image(
+                    width: 300,
+                    height: 300,
+                    image: NetworkImage(
+                        "https://i.pinimg.com/originals/80/1d/90/801d90bddba8bc272a7f27d67d2552f8.jpg")),
+              ),
+              URlClass(
+                  myfunction: Facebook_FunctionG,
+                  myplatformIcon: Icons.facebook,
+                  myplatformSubTitle: "Visit his facebook page",
+                  myplatformTitle: "Gorden Ramsey"),
+              URlClass(
+                  myfunction: instagram_functionG,
+                  myplatformIcon: Ionicons.logo_instagram,
+                  myplatformSubTitle: "visit his instagram page",
+                  myplatformTitle: "Gorden Ramsey"),
             ],
           )
         ],
